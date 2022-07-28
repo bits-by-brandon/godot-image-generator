@@ -1,6 +1,7 @@
+let chrome = null;
+let puppeteer;
+
 export async function GET(event) {
-	let chrome = {};
-	let puppeteer;
 	if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
 		// running on the Vercel platform.
 		chrome = await import('chrome-aws-lambda');
@@ -13,7 +14,9 @@ export async function GET(event) {
 	const width = event.url.searchParams.get('width') || 400;
 	const height = event.url.searchParams.get('height') || 300;
 
-	const browser = await puppeteer.launch();
+	const launchOptions = chrome ? await chrome.executablePath : {};
+
+	const browser = await puppeteer.launch(launchOptions);
 	const page = await browser.newPage();
 	await page.setViewport({ height, width, deviceScaleFactor: 2 });
 

@@ -1,8 +1,8 @@
 import playwright from 'playwright-aws-lambda';
 
 export async function GET(event) {
-	const width = event.url.searchParams.get('width') || 400;
-	const height = event.url.searchParams.get('height') || 300;
+	const width = parseInt(event.url.searchParams.get('width') || 400);
+	const height = parseInt(event.url.searchParams.get('height') || 300);
 	//
 	// const launchOptions = chrome
 	// 	? {

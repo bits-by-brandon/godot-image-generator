@@ -14,7 +14,13 @@ export async function GET(event) {
 	const width = event.url.searchParams.get('width') || 400;
 	const height = event.url.searchParams.get('height') || 300;
 
-	const launchOptions = chrome ? await chrome.executablePath : {};
+	const launchOptions = chrome
+		? {
+				args: chrome.args,
+				executablePath: await chrome.executablePath,
+				headless: chrome.headless
+		  }
+		: {};
 
 	const browser = await puppeteer.launch(launchOptions);
 	const page = await browser.newPage();

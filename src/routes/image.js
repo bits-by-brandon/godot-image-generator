@@ -1,16 +1,15 @@
 let chrome = null;
 let puppeteer;
+if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
+	// running on the Vercel platform.
+	chrome = await import('chrome-aws-lambda');
+	puppeteer = await import('puppeteer-core');
+} else {
+	// running locally.
+	puppeteer = await import('puppeteer');
+}
 
 export async function GET(event) {
-	if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-		// running on the Vercel platform.
-		chrome = await import('chrome-aws-lambda');
-		puppeteer = await import('puppeteer-core');
-	} else {
-		// running locally.
-		puppeteer = await import('puppeteer');
-	}
-
 	const width = event.url.searchParams.get('width') || 400;
 	const height = event.url.searchParams.get('height') || 300;
 

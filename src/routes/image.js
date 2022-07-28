@@ -1,4 +1,4 @@
-import { chromium } from 'playwright';
+import playwright from 'playwright-aws-lambda';
 
 export async function GET(event) {
 	const width = event.url.searchParams.get('width') || 400;
@@ -18,7 +18,7 @@ export async function GET(event) {
 	const domUrl = event.url;
 	domUrl.pathname = 'dom';
 
-	const browser = await chromium.launch(); // Or 'firefox' or 'webkit'.
+	const browser = await playwright.launchChromium(); // Or 'firefox' or 'webkit'.
 	const page = await browser.newPage();
 	await page.setViewportSize({ height, width });
 	await page.goto(domUrl.toString(), { waitUntil: 'domcontentloaded' });

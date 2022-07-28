@@ -80,8 +80,8 @@
 		flex-direction: row;
 		align-items: flex-start;
 		justify-content: space-between;
-		padding: 40px;
-		gap: 80px;
+		padding: 4vw;
+		gap: 10%;
 	}
 
 	.copy {
@@ -91,28 +91,28 @@
 
 	.line {
 		height: 2px;
-		width: 80px;
+		width: 8vw;
 		background: white;
-		margin-bottom: 20px;
+		margin-bottom: 3vw;
 	}
 
 	.supertext {
-		font-size: 18px;
+		font-size: 2vw;
 		text-transform: uppercase;
 		color: #6bb1ee;
-		margin-bottom: 12px;
+		margin-bottom: 2vw;
 		letter-spacing: 4px;
 	}
 
 	.title {
-		font-size: 64px;
+		font-size: 6vw;
 		font-weight: bold;
-		margin-bottom: 12px;
-		max-width: 70%;
+		margin-bottom: 2vw;
+		line-height: 1.2;
 	}
 
 	.subtext {
-		font-size: 24px;
+		font-size: 2vw;
 		margin-bottom: 12px;
 		display: inline-block;
 		max-width: 50%;

@@ -17,6 +17,15 @@
 	export let subtext = 'subtext';
 </script>
 
+<svelte:head>
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;500;800&display=swap"
+		rel="stylesheet"
+	/>
+</svelte:head>
+
 <div class="container">
 	<div class="copy">
 		<div class="line" />
@@ -57,10 +66,10 @@
 	}
 
 	:global(html, body) {
+		font-family: 'JetBrains Mono', monospace;
 		padding: 0;
 		margin: 0;
 		color: white;
-		font-family: sans-serif;
 	}
 
 	.container {
@@ -89,23 +98,20 @@
 
 	.supertext {
 		font-size: 18px;
-		font-family: monospace;
 		text-transform: uppercase;
 		color: #6bb1ee;
 		margin-bottom: 12px;
-		letter-spacing: 2px;
+		letter-spacing: 4px;
 	}
 
 	.title {
-		font-size: 42px;
+		font-size: 64px;
 		font-weight: bold;
 		margin-bottom: 12px;
 	}
 
 	.subtext {
-		font-size: 18px;
-		font-family: monospace;
-		text-transform: uppercase;
+		font-size: 24px;
 		margin-bottom: 12px;
 		letter-spacing: 2px;
 	}

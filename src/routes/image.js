@@ -1,32 +1,26 @@
-let chrome = null;
-let puppeteer;
-if (process.env.AWS_LAMBDA_FUNCTION_VERSION) {
-	// running on the Vercel platform.
-	chrome = await import('chrome-aws-lambda');
-	puppeteer = await import('puppeteer-core');
-} else {
-	// running locally.
-	puppeteer = await import('puppeteer');
-}
+import { chromium } from 'playwright';
 
 export async function GET(event) {
 	const width = event.url.searchParams.get('width') || 400;
 	const height = event.url.searchParams.get('height') || 300;
+	//
+	// const launchOptions = chrome
+	// 	? {
+	// 			args: chrome.args,
+	// 			executablePath: await chrome.executablePath,
+	// 			headless: chrome.headless
+	// 	  }
+	// 	: {};
 
-	const launchOptions = chrome
-		? {
-				args: chrome.args,
-				executablePath: await chrome.executablePath,
-				headless: chrome.headless
-		  }
-		: {};
-
-	const browser = await puppeteer.launch(launchOptions);
-	const page = await browser.newPage();
-	await page.setViewport({ height, width, deviceScaleFactor: 2 });
+	// const browser = await context.launch(launchOptions);
+	// const page = await browser.newPage();
 
 	const domUrl = event.url;
 	domUrl.pathname = 'dom';
+
+	const browser = await chromium.launch(); // Or 'firefox' or 'webkit'.
+	const page = await browser.newPage();
+	await page.setViewportSize({ height, width });
 	await page.goto(domUrl.toString(), { waitUntil: 'domcontentloaded' });
 	const screenshot = await page.screenshot();
 	await browser.close();

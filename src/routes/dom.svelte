@@ -81,7 +81,7 @@
 		align-items: flex-start;
 		justify-content: space-between;
 		padding: 40px;
-		gap: 40px;
+		gap: 80px;
 	}
 
 	.copy {
@@ -108,17 +108,19 @@
 		font-size: 64px;
 		font-weight: bold;
 		margin-bottom: 12px;
+		max-width: 70%;
 	}
 
 	.subtext {
 		font-size: 24px;
 		margin-bottom: 12px;
-		letter-spacing: 2px;
+		display: inline-block;
+		max-width: 50%;
 	}
 
 	.godot-logo {
 		flex-shrink: 0;
-		width: 12%;
+		width: 10%;
 		height: auto;
 	}
 </style>

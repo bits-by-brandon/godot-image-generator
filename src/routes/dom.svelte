@@ -5,16 +5,18 @@
 			props: {
 				title: url.searchParams.get('title') || undefined,
 				subtext: url.searchParams.get('subtext') || undefined,
-				supertext: url.searchParams.get('supertext') || undefined
+				supertext: url.searchParams.get('supertext') || undefined,
+				image: url.searchParams.get('image') || undefined
 			}
 		};
 	}
 </script>
 
 <script>
-	export let supertext = 'supertext';
-	export let title = 'title';
-	export let subtext = 'subtext';
+	export let supertext;
+	export let title;
+	export let subtext;
+	export let image;
 </script>
 
 <svelte:head>
@@ -27,11 +29,23 @@
 </svelte:head>
 
 <div class="container">
+	{#if image}
+		<img src={image} alt="" />
+	{/if}
+
+	<div class="overlay" class:transparent={image} />
+
 	<div class="copy">
 		<div class="line" />
-		<div class="supertext">{supertext}</div>
-		<div class="title">{title}</div>
-		<div class="subtext">{subtext}</div>
+		{#if supertext}
+			<div class="supertext">{supertext}</div>
+		{/if}
+		{#if title}
+			<div class="title">{title}</div>
+		{/if}
+		{#if subtext}
+			<div class="subtext">{subtext}</div>
+		{/if}
 	</div>
 	<svg
 		class="godot-logo"
@@ -73,7 +87,8 @@
 	}
 
 	.container {
-		background: linear-gradient(to top left, #081a33 0%, #070d21 70%);
+		position: relative;
+		overflow: hidden;
 		display: flex;
 		width: 100%;
 		height: 100vh;
@@ -112,10 +127,37 @@
 	}
 
 	.subtext {
-		font-size: 2vw;
+		font-size: 2.4vw;
 		margin-bottom: 12px;
 		display: inline-block;
 		max-width: 50%;
+	}
+
+	.overlay {
+		background: linear-gradient(to top left, #081a33 0%, #070d21 70%);
+		position: absolute;
+		overflow: hidden;
+		display: flex;
+		width: 100%;
+		height: 100vh;
+		top: 0;
+		left: 0;
+		z-index: -1;
+	}
+
+	.overlay.transparent {
+		background: linear-gradient(to top left, rgba(21, 79, 159, 0.6) 0%, #070d21bb 70%);
+	}
+
+	img {
+		position: absolute;
+		object-fit: cover;
+		object-position: center;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
 	}
 
 	.godot-logo {

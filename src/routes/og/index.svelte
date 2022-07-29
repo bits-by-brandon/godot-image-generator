@@ -80,12 +80,6 @@
 		gap: 8px;
 	}
 
-	.godot-logo {
-		flex-shrink: 0;
-		width: 12%;
-		height: auto;
-	}
-
 	a {
 		color: #6bb1ee;
 	}

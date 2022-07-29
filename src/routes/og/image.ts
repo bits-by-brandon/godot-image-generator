@@ -3,20 +3,9 @@ import playwright from 'playwright-aws-lambda';
 export async function GET(event) {
 	const width = parseInt(event.url.searchParams.get('width') || 1200);
 	const height = parseInt(event.url.searchParams.get('height') || 630);
-	//
-	// const launchOptions = chrome
-	// 	? {
-	// 			args: chrome.args,
-	// 			executablePath: await chrome.executablePath,
-	// 			headless: chrome.headless
-	// 	  }
-	// 	: {};
-
-	// const browser = await context.launch(launchOptions);
-	// const page = await browser.newPage();
 
 	const domUrl = event.url;
-	domUrl.pathname = 'dom';
+	domUrl.pathname = 'og/preview';
 
 	const browser = await playwright.launchChromium({ headless: true }); // Or 'firefox' or 'webkit'.
 	const page = await browser.newPage();

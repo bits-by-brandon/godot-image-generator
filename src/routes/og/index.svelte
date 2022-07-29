@@ -13,7 +13,7 @@
 	});
 
 	$: if (url) {
-		url.pathname = '/image';
+		url.pathname = '/og/image';
 		if (supertext) url.searchParams.set('supertext', supertext);
 		if (title) url.searchParams.set('title', title);
 		if (subtext) url.searchParams.set('subtext', subtext);

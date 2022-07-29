@@ -1,8 +1,9 @@
+import type { RequestEvent } from '@sveltejs/kit';
 import playwright from 'playwright-aws-lambda';
 
-export async function GET(event) {
-	const width = parseInt(event.url.searchParams.get('width') || 1200);
-	const height = parseInt(event.url.searchParams.get('height') || 630);
+export async function GET(event: RequestEvent) {
+	const width = parseInt(event.url.searchParams.get('width') || '1200');
+	const height = parseInt(event.url.searchParams.get('height') || '630');
 
 	const domUrl = event.url;
 	domUrl.pathname = 'og/preview';
@@ -23,7 +24,7 @@ export async function GET(event) {
 					// Image failed, so it has no height
 					throw new Error('Image failed to load');
 				}
-				// Image hasn’t loaded yet, added an event listener to know when it does
+				// Image has not loaded yet, added an event listener to know when it does
 				return new Promise((resolve, reject) => {
 					img.addEventListener('load', resolve);
 					img.addEventListener('error', reject);

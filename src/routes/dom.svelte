@@ -90,7 +90,6 @@
 		position: relative;
 		overflow: hidden;
 		display: flex;
-		width: 100%;
 		height: 100vh;
 		flex-direction: row;
 		align-items: flex-start;
@@ -102,6 +101,7 @@
 	.copy {
 		display: flex;
 		flex-direction: column;
+		width: 80%;
 	}
 
 	.line {

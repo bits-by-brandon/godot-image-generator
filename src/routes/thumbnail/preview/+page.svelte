@@ -1,20 +1,5 @@
-<script context="module">
-	export async function load({ url }) {
-		return {
-			status: 200,
-			props: {
-				title: url.searchParams.get('title') || undefined,
-				supertext: url.searchParams.get('supertext') || undefined,
-				image: url.searchParams.get('image') || undefined
-			}
-		};
-	}
-</script>
-
 <script>
-	export let supertext;
-	export let title;
-	export let image;
+	export let data;
 </script>
 
 <svelte:head>
@@ -27,19 +12,23 @@
 </svelte:head>
 
 <div class="container">
-	{#if image}
-		<img src={image} alt="" />
+	{#if data.externalImage}
+		<img src={data.externalImage} alt="" />
 	{/if}
 
-	<div class="overlay" class:transparent={image} />
+	{#if data.uploadedImage}
+		<img id="uploadedImage" src="" alt="" />
+	{/if}
+
+	<div class="overlay" class:transparent={data.uploadedImage || data.externalImage} />
 
 	<div class="copy">
 		<div class="line" />
-		{#if supertext}
-			<div class="supertext">{supertext}</div>
+		{#if data.supertext}
+			<div class="supertext">{data.supertext}</div>
 		{/if}
-		{#if title}
-			<div class="title">{title}</div>
+		{#if data.title}
+			<div class="title">{data.title}</div>
 		{/if}
 	</div>
 	<svg
@@ -151,7 +140,7 @@
 
 	.godot-logo {
 		flex-shrink: 0;
-		width: 40%;
+		width: 36%;
 		height: auto;
 		position: absolute;
 		top: var(--padding);

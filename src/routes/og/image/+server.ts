@@ -7,12 +7,10 @@ export async function GET(event: RequestEvent) {
 	const height = parseInt(event.url.searchParams.get('height') || '630');
 	const screenshot = await generateScreenshot(event.url, width, height);
 
-	return {
-		status: 200,
+	return new Response(screenshot, {
 		headers: {
 			'content-type': 'image/png',
 			'access-control-allow-origin': '*'
-		},
-		body: screenshot
-	};
+		}
+	});
 }

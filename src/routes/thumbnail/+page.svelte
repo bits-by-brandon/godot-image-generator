@@ -1,46 +1,45 @@
 <script lang="ts">
 	let supertext = 'supertext';
 	let title = 'title';
-	let image = '';
-	let imgUploadForm: HTMLFormElement;
-	let imgUploadInput: HTMLInputElement;
-	let imgUploadSource: HTMLImageElement;
+	let externalImage = '';
+	let uploadedImageInput: HTMLInputElement;
+	let uploadedImagePreview: HTMLImageElement;
 
 	function handleChange(e: Event) {
 		e.preventDefault();
 		const reader = new FileReader();
-		const myFile = imgUploadInput.files[0];
-		reader.addEventListener('load', () => (imgUploadSource.src = reader.result.toString()), false);
+		const myFile = uploadedImageInput.files[0];
+		reader.addEventListener('load', () => (uploadedImagePreview.src = reader.result.toString()), false);
 		reader.readAsDataURL(myFile);
 	}
 </script>
 
-<form action="thumbnail/image" method="POST" class="form" bind:this={imgUploadForm}>
+<form action="thumbnail/image" method="POST" enctype="multipart/form-data">
 	<h1>Godot image asset generator</h1>
 	<label>
 		supertext:
-		<input type="text" bind:value={supertext} />
+		<input name="supertext" type="text" bind:value={supertext} />
 	</label>
 	<label>
 		title:
-		<input type="text" bind:value={title} />
+		<input name="title" type="text" bind:value={title} />
 	</label>
 	<label>
 		external image link:
-		<input type="url" bind:value={image} />
+		<input name="externalImage" type="url" bind:value={externalImage} />
 	</label>
 	- OR -
-	<label for="img-upload-input">
+	<label>
 		Upload Image
 		<input
 			type="file"
-			id="img-upload-input"
-			name="img-upload-input"
+			id="uploadedImage"
+			name="uploadedImage"
 			accept="image/*"
-			bind:this={imgUploadInput}
+			bind:this={uploadedImageInput}
 			on:change={handleChange}
 		/>
-		<img src="" alt="" id="img-upload-source" bind:this={imgUploadSource} />
+		<img src="" alt="" id="imgUploadPreview" bind:this={uploadedImagePreview} />
 	</label>
 
 	<input type="submit" value="Generate Image" />
@@ -61,7 +60,7 @@
 		margin-top: 0;
 	}
 
-	.form {
+	form {
 		width: 300px;
 		display: flex;
 		flex-direction: column;
@@ -73,7 +72,7 @@
 		flex-direction: column;
 	}
 
-	#img-upload-source {
+	#imgUploadPreview {
 		width: 300px;
 		max-width: 100%;
 	}

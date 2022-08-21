@@ -1,3 +1,4 @@
+import { json } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
 import FormData from 'form-data';
 import { Directus } from '@directus/sdk';
@@ -35,11 +36,9 @@ export async function GET(event: RequestEvent) {
 		requestOptions: { headers: { ...form.getHeaders() } }
 	});
 
-	return {
-		status: 200,
+	return json(response, {
 		headers: {
 			'access-control-allow-origin': '*'
-		},
-		body: response
-	};
+		}
+	});
 }

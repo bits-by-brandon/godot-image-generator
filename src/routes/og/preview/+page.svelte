@@ -1,22 +1,6 @@
-<script context="module">
-	export async function load({ url }) {
-		return {
-			status: 200,
-			props: {
-				title: url.searchParams.get('title') || undefined,
-				subtext: url.searchParams.get('subtext') || undefined,
-				supertext: url.searchParams.get('supertext') || undefined,
-				image: url.searchParams.get('image') || undefined
-			}
-		};
-	}
-</script>
-
 <script>
-	export let supertext;
-	export let title;
-	export let subtext;
-	export let image;
+	/** @type {import('./$types').PageData} */
+	export let data;
 </script>
 
 <svelte:head>
@@ -29,22 +13,22 @@
 </svelte:head>
 
 <div class="container">
-	{#if image}
-		<img src={image} alt="" />
+	{#if data.image}
+		<img src={data.image} alt="" />
 	{/if}
 
-	<div class="overlay" class:transparent={image} />
+	<div class="overlay" class:transparent={data.image} />
 
 	<div class="copy">
 		<div class="line" />
-		{#if supertext}
-			<div class="supertext">{supertext}</div>
+		{#if data.supertext}
+			<div class="supertext">{data.supertext}</div>
 		{/if}
-		{#if title}
-			<div class="title">{title}</div>
+		{#if data.title}
+			<div class="title">{data.title}</div>
 		{/if}
-		{#if subtext}
-			<div class="subtext">{subtext}</div>
+		{#if data.subtext}
+			<div class="subtext">{data.subtext}</div>
 		{/if}
 	</div>
 	<svg

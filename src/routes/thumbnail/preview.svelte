@@ -140,7 +140,7 @@
 	}
 
 	.overlay.transparent {
-		background: linear-gradient(to top left, rgba(21, 79, 159, 0.6) 0%, #070d2166 70%);
+		background: linear-gradient(to bottom left, rgba(21, 79, 159, 0.1) 0%, #070d2166 85%);
 	}
 
 	img {

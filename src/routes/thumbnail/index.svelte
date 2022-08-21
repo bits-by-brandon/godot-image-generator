@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 
 	let supertext = 'supertext';
@@ -7,13 +7,24 @@
 	let image = '';
 	let asset_url = '';
 	let url;
+	let imgUploadForm: HTMLFormElement;
+	let imgUploadInput: HTMLInputElement;
+	let imgUploadSource: HTMLImageElement;
 
 	onMount(() => {
 		url = new URL(window.location);
 	});
 
+	function handleUpload(e: SubmitEvent) {
+		e.preventDefault();
+		const reader = new FileReader();
+		const myFile = imgUploadInput.files[0];
+		reader.addEventListener('load', () => (imgUploadSource.src = reader.result.toString()), false);
+		reader.readAsDataURL(myFile);
+	}
+
 	$: if (url) {
-		url.pathname = '/preview/image';
+		url.pathname = '/thumbnail/image';
 		if (supertext) url.searchParams.set('supertext', supertext);
 		if (title) url.searchParams.set('title', title);
 		if (subtext) url.searchParams.set('subtext', subtext);
@@ -38,9 +49,25 @@
 			<input type="text" bind:value={subtext} />
 		</label>
 		<label>
-			image:
+			external image link:
 			<input type="url" bind:value={image} />
 		</label>
+		- OR -
+		<form id="img-upload-form" bind:this={imgUploadForm} on:submit={handleUpload}>
+			<label for="img-upload-input">
+				Upload Image
+				<input
+					type="file"
+					id="img-upload-input"
+					name="img-upload-input"
+					accept="image/*"
+					bind:this={imgUploadInput}
+				/>
+				<input type="submit" />
+				<img src="" id="img-upload-source" bind:this={imgUploadSource} />
+			</label>
+		</form>
+
 		<a href={asset_url}>Generate Image</a>
 	</div>
 </div>
@@ -51,9 +78,8 @@
 	}
 
 	:global(html, body) {
-		padding: 0;
+		padding: 20px;
 		margin: 0;
-		color: white;
 		font-family: sans-serif;
 	}
 
@@ -61,26 +87,20 @@
 		margin-top: 0;
 	}
 
-	.container {
-		background: linear-gradient(to top left, #081a33 0%, #070d21 70%);
-		display: flex;
-		width: 100%;
-		height: 100vh;
-		flex-direction: row;
-		align-items: flex-start;
-		justify-content: space-between;
-		padding: 40px;
-		gap: 40px;
-	}
-
 	.form {
 		width: 300px;
 		display: flex;
 		flex-direction: column;
-		gap: 8px;
+		gap: 10px;
 	}
 
-	a {
-		color: #6bb1ee;
+	label {
+		display: flex;
+		flex-direction: column;
+	}
+
+	#img-upload-source {
+		width: 300px;
+		max-width: 100%;
 	}
 </style>

@@ -1,8 +1,6 @@
 import playwright from 'playwright-aws-lambda';
 
 export default async function generateScreenshot(url: URL, width: number, height: number) {
-	url.pathname = 'og/preview';
-
 	const browser = await playwright.launchChromium({ headless: true }); // Or 'firefox' or 'webkit'.
 	const page = await browser.newPage();
 	await page.setViewportSize({ height, width });

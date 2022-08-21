@@ -83,7 +83,7 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		width: 70%;
+		width: 80%;
 		height: 100%;
 	}
 
@@ -105,10 +105,10 @@
 	}
 
 	.title {
-		font-size: 6vw;
+		font-size: 8vw;
 		font-weight: bold;
 		margin-bottom: 2vw;
-		line-height: 1.2;
+		line-height: 1.1;
 	}
 
 	.overlay {
@@ -145,5 +145,6 @@
 		position: absolute;
 		top: var(--padding);
 		right: var(--padding);
+		filter: drop-shadow(0px 0px 40px rgb(0 0 0 / 0.3));
 	}
 </style>

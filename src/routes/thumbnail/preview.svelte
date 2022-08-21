@@ -4,7 +4,6 @@
 			status: 200,
 			props: {
 				title: url.searchParams.get('title') || undefined,
-				subtext: url.searchParams.get('subtext') || undefined,
 				supertext: url.searchParams.get('supertext') || undefined,
 				image: url.searchParams.get('image') || undefined
 			}
@@ -15,7 +14,6 @@
 <script>
 	export let supertext;
 	export let title;
-	export let subtext;
 	export let image;
 </script>
 
@@ -42,9 +40,6 @@
 		{/if}
 		{#if title}
 			<div class="title">{title}</div>
-		{/if}
-		{#if subtext}
-			<div class="subtext">{subtext}</div>
 		{/if}
 	</div>
 	<svg

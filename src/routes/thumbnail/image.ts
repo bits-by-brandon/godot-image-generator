@@ -1,7 +1,14 @@
 import type { RequestEvent } from '@sveltejs/kit';
 import generateScreenshot from '$lib/generateScreenshot';
 
-export async function GET(event: RequestEvent) {
+export async function POST(event: RequestEvent) {
+	if (!event.request.body) return { status: 500 };
+
+	await new Promise(() => {
+		let data = '';
+		event.request
+	});
+
 	event.url.pathname = '/thumbnail/preview';
 	const width = parseInt(event.url.searchParams.get('width') || '1280');
 	const height = parseInt(event.url.searchParams.get('height') || '720');
